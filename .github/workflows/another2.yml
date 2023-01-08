@@ -35,8 +35,8 @@ jobs:
       #   run: sleep 60
       - name: Destroy Terraform
         run: |
-          INSTANCE_ID=$(terraform output instance_id)
-          echo "Instance ID: ${INSTANCE_ID}"
-          -auto-approve -var 'instance_name= ${{inputs.instance_name}}' -input=false
+          terraform destroy -auto-approve -var-file=variables.tfvars -input=false -auto-approve
+          
+          
 
 
