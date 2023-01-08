@@ -1,19 +1,19 @@
-provider "aws" {
-  region = "us-east-1"
-}
+# provider "aws" {
+#   region = "us-east-1"
+# }
 
-variable "instance_name" {
-  type        = string
-  description = "The name tag of the ec2 instance"
-}
-resource "aws_instance" "myec2" {
+# variable "instance_name" {
+#   type        = string
+#   description = "The name tag of the ec2 instance"
+# }
+# resource "aws_instance" "myec2" {
 
-  ami           = "ami-0b5eea76982371e91"
-  instance_type = "t2.micro"
+#   ami           = "ami-0b5eea76982371e91"
+#   instance_type = "t2.micro"
 
-  tags = {
-    Name = "${var.instance_name}"
-  }
+#   tags = {
+#     Name = "${var.instance_name}"
+#   }
 
-}
+# }
 
