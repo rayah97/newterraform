@@ -19,9 +19,10 @@ jobs:
     - name: Run terraform plan
       run: terraform plan -out=tfplan
     - name: Create comment
-      uses: peter-evans/create-pull-request-comment@v2
+      uses: mshick/add-pr-comment@v2
+      
       with:
-        body: |
+        message: |
           The output of `terraform plan` is:
           ```
           $(cat tfplan)
