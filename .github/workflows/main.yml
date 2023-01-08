@@ -5,7 +5,7 @@ on:
     inputs:
       instance_name:
         description: 'Instance name'
-        required: required
+        required: true
         type: string
 
 jobs:
