@@ -31,3 +31,6 @@
 #         run: sleep 60
 #       - name: Destroy Terraform
 #         run: terraform destroy -auto-approve -var 'instance_name= ${{inputs.instance_name}}' -input=false
+
+
+
