@@ -1,1 +1,31 @@
+name: Terraform
 
+on:
+  workflow_dispatch:
+     inputs:
+     instance_name:
+        description: 'Instance name'
+        required: optional
+        type: string
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.14.7
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+            aws-region: us-east-1
+      - name: Init Terraform
+        run: terraform init
+      - name: Apply Terraform
+        run: terraform apply -var 'name= ${{inputs.instance_name}}' -auto-approve         
+      # - name: Destroy Terraform
+      #   run: terraform destroy -auto-approve
