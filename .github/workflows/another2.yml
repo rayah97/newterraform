@@ -39,7 +39,7 @@ jobs:
           
       - name: Destroy Terraform
         run: |
-          INSTANCE_ID=$(terraform output aws_instance.myec2.id)
+          IINSTANCE_ID=$(terraform output instance_id)
           terraform destroy -auto-approve -var "instance_id=${INSTANCE_ID}"  -input=false
 
 
