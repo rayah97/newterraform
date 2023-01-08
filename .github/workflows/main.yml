@@ -2,11 +2,11 @@ name: Terraform
 
 on:
   workflow_dispatch:
-     inputs:
-        instance_name:
-          description: 'Instance name'
-          required: required
-          type: string
+    inputs:
+      instance_name:
+        description: 'Instance name'
+        required: required
+        type: string
 
 jobs:
   terraform:
