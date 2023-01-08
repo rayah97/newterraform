@@ -26,6 +26,6 @@ jobs:
       - name: Init Terraform
         run: terraform init
       - name: Apply Terraform
-        run:  run: terraform apply -var 'name= ${{inputs.instance_name}}' -input=false -auto-approve       
+        run: terraform apply -var 'name= ${{inputs.instance_name}}' -input=false -auto-approve       
       # - name: Destroy Terraform
       #   run: terraform destroy -auto-approve
