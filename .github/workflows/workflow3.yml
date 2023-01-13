@@ -30,4 +30,4 @@ jobs:
            -var 'instance_name= ${{inputs.instance_name}}' 
            -input=false -auto-approve
             -state=s3://bucketforterraformangit/develop/terraform.tfstate 
-            -backup=s3://bucketforterraformangit/develop/my-tf-state.backup
+            -backup=s3://bucketforterraformangit/backup/my-tf-state.backup
