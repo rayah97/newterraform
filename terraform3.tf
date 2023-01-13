@@ -1,11 +1,3 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
-variable "name" {
-  default = "my-ec2-instance"
-}
-
 resource "aws_s3_bucket" "tf_state_bucket" {
   bucket = "my-tf-state-bucket"
   acl    = "private"
@@ -17,19 +9,18 @@ resource "aws_s3_bucket_object" "tf_state_file" {
   key    = "path/to/my/state/file"
 }
 
-resource "aws_instance" "example" {
-  ami           = "ami-0e73a05f4e04a71f1"
-  instance_type = "t2.micro"
+output "tf_state_bucket_id" {
+  value = aws_s3_bucket.tf_state_bucket.id
+}
 
-  tags = {
-    Name = var.name
-  }
+output "tf_state_file_key" {
+  value = aws_s3_bucket_object.tf_state_file.key
 }
 
 terraform {
   backend "s3" {
-    bucket = aws_s3_bucket.tf_state_bucket.id
-    key    = aws_s3_bucket_object.tf_state_file.key
+    bucket = var.tf_state_bucket_id
+    key    = var.tf_state_file_key
     region = "us-east-1"
   }
 }
