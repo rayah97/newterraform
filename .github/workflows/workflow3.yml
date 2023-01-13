@@ -22,8 +22,8 @@ jobs:
     - name: Initialize Terraform
       run: terraform init 
     - name: Create EC2 instance
-      run: terraform apply -var "name=${{inputs.instance_name}}" -backend-config="bucket=my-tf-state-bucket" -backend-config="key=ec2-instance.tfstate" -auto-approve
+      run: terraform apply -var 'instance_name= ${{inputs.instance_name}}' -input=false -auto-approve
     - name: Wait for 30 seconds
       run: sleep 30
     - name: Destroy EC2 instance
-      run: terraform destroy-var "name=${{inputs.instance_name}}" -backend-config="bucket=my-tf-state-bucket" -backend-config="key=ec2-instance.tfstate" -auto-approve
+      run: terraform destroy terraform apply -var 'instance_name= ${{inputs.instance_name}}' -input=false -auto-approve
