@@ -33,5 +33,5 @@ jobs:
            -backup=s3://bucketforterraformangit/develop/terraform.tfstate.backup
 
     - name: Terraform State Push
-      run: terraform state push -auto-approve -state=s3://bucketforterraformangit/develop/terraform.tfstate -backup=s3://bucketforterraformangit/backup/terraform.tfstate.backup
+      run: terraform state push  -state=s3://bucketforterraformangit/develop/terraform.tfstate -backup=s3://bucketforterraformangit/backup/terraform.tfstate.backup
             
