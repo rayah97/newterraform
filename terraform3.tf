@@ -16,6 +16,6 @@ terraform {
   backend "s3" {
     bucket = aws_s3_bucket.tf_state_bucket.id
     key    = aws_s3_bucket_object.tf_state_file.key
-    region = aws_s3_bucket.tf_state_bucket.region
+    region = aws.region
   }
 }
