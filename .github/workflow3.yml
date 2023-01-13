@@ -1,0 +1,29 @@
+name: Create and Destroy EC2 instance
+on:
+  workflow_dispatch:
+    inputs:
+      instance_name:
+        description: "Instance name"
+        required: true
+        type: string
+
+jobs:
+  create_instance:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{secrets.AWS_SECRET_KEY}}
+        aws-region: us-east-1
+    - name: Initialize Terraform
+      run: terraform init -backend-config="bucket=my-tf-state-bucket" -backend-config="key=ec2-instance.tfstate"
+    - name: Create EC2 instance
+      run: terraform apply -var "name=${{inputs.instance_name}}" -auto-approve
+    - name: Wait for 30 seconds
+      run: sleep 30
+    - name: Destroy EC2 instance
+      run: terraform destroy -var "name=${{inputs.instance_name}}" -auto-approve
