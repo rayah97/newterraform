@@ -26,5 +26,5 @@ jobs:
     - name: Initialize Terraform
       run: terraform init 
     - name: Destroy EC2 instance
-      run: terraform destroy -var 'instance_name= ${{inputs.instance_name}}' -input=false -auto-approve
+      run: terraform destroy -target=aws_instance.myec2 -var 'instance_name= ${{inputs.instance_name}}' -input=false -auto-approve
 
