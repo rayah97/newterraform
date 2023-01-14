@@ -1,4 +1,4 @@
-name: Create and Destroy EC2 instance
+name: Create EC2 instance
 on:
   workflow_dispatch:
     inputs:
@@ -27,13 +27,6 @@ jobs:
       run: terraform init 
     - name: Create EC2 instance
       run: terraform apply -var 'instance_name= ${{inputs.instance_name}}' -input=false -auto-approve
-    - name: Wait for 30 seconds
-      run: sleep 30
-    - name: Destroy EC2 instance
-      run: terraform destroy 
-           -var 'instance_name= ${{inputs.instance_name}}' 
-           -input=false -auto-approve
-           -state=s3://bucketforterraformangit/develop/terraform.tfstate 
-           -backup=s3://bucketforterraformangit/develop/terraform.tfstate.backup
+   
 
    
