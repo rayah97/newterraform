@@ -1,4 +1,4 @@
-name: Create EC2 instance
+name: Destroy EC2 Instance
 on:
   workflow_dispatch:
     inputs:
@@ -8,7 +8,7 @@ on:
         type: string
 
 jobs:
-  create_instance:
+  destroy_instance:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -25,8 +25,6 @@ jobs:
         aws-region: us-east-1
     - name: Initialize Terraform
       run: terraform init 
-    - name: Create EC2 instance
-      run: terraform apply -var 'instance_name= ${{inputs.instance_name}}' -input=false -auto-approve
-   
+    - name: Destroy EC2 instance
+      run: terraform destroy -var 'instance_name= ${{inputs.instance_name}}' -input=false -auto-approve
 
-   
