@@ -35,8 +35,8 @@ output "tf_state_file_key" {
 
 terraform {
   backend "s3" {
-    bucket = var.tf_state_bucket_id
-    key    = var.tf_state_file_key
+    bucket = aws_s3_bucket.tf_state_bucket.id
+    key    = aws_s3_bucket_object.tf_state_file.key
     region = "us-east-1"
   }
 }
