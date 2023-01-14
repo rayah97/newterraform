@@ -1,14 +1,14 @@
-name:  Destroy EC2 instance
+name: Destroy EC2 Instance
 on:
   workflow_dispatch:
-    # inputs:
-    #   instance_name:
-    #     description: "Instance name"
-    #     required: true
-    #     type: string
+    inputs:
+      instance_name:
+        description: "Instance name"
+        required: true
+        type: string
 
 jobs:
-  create_instance:
+  destroy_instance:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -24,8 +24,7 @@ jobs:
         aws-secret-access-key: ${{secrets.AWS_SECRET_KEY}}
         aws-region: us-east-1
     - name: Initialize Terraform
-      run: terraform init -backend-config="bucket=my-tf-state-bucket" -backend-config="key=develop/"
+      run: terraform init 
     - name: Destroy EC2 instance
-      run: terraform destroy -target=aws_instance.myec2 -auto-approve
+      run: terraform destroy -var 'instance_name= ${{inputs.instance_name}}' -input=false -auto-approve
 
-   
