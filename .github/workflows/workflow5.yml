@@ -1,11 +1,7 @@
 name: Destroy EC2 Instance
 on:
   workflow_dispatch:
-    inputs:
-      instance_name:
-        description: "Instance name"
-        required: true
-        type: string
+
 
 jobs:
   destroy_instance:
@@ -26,5 +22,7 @@ jobs:
     - name: Initialize Terraform
       run: terraform init 
     - name: Destroy EC2 instance
-      run: terraform destroy -target=aws_instance.myec2 -var 'instance_name= ${{inputs.instance_name}}' -input=false -auto-approve
+      run: terraform destroy 
+           -target=aws_instance.myec2
+           -input=false -auto-approve
 
