@@ -3,14 +3,17 @@
 }
 
 resource "aws_s3_bucket" "tf_state_bucket" {
-  bucket = "my-tf-state-bucket"
+  bucket = "bucketforterraformangit11"
   acl    = "private"
   region = "us-east-1"
+  versioning {
+    enabled = true
+  }
 }
 
 resource "aws_s3_bucket_object" "tf_state_file" {
   bucket = aws_s3_bucket.tf_state_bucket.id
-  key    = "develop/"
+  key    = "develop/terraform.tfstate"
 }
 
 variable "instance_name" {
@@ -33,10 +36,10 @@ output "tf_state_file_key" {
   value = aws_s3_bucket_object.tf_state_file.key
 }
 
-terraform {
+ terraform {
   backend "s3" {
-    bucket = aws_s3_bucket.tf_state_bucket.id
-    key    = aws_s3_bucket_object.tf_state_file.key
+    bucket = "bucketforterraformangit"
+    key    = "develop/terraform.tfstate"
     region = "us-east-1"
   }
 }
